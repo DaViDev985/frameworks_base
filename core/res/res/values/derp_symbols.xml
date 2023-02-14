@@ -24,4 +24,7 @@
     <!-- ATV remote custom keys handling -->
     <java-symbol type="array" name="keyhandler_keycodes" />
     <java-symbol type="array" name="keyhandler_packages" />
+
+    <!-- Whether to use Richtap vibration -->
+    <java-symbol type="bool" name="config_usesRichtapVibration" />
 </resources>
