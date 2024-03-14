@@ -37,6 +37,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.os.VibrationEffect;
 import android.provider.Settings;
 import android.service.vr.IVrManager;
@@ -123,8 +124,13 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
 
     private final boolean mHasVibrator;
     private final Vibrator mVibrator;
+    private final VibratorManager mVibratorManager;
+    private static final VibrationEffect BRIGHTNESS_SLIDER_HAPTIC =
+            VibrationEffect.get(VibrationEffect.EFFECT_TEXTURE_TICK);
     private static final VibrationEffect BRIGHTNESS_ICON_HAPTIC =
             VibrationEffect.get(VibrationEffect.EFFECT_CLICK);
+
+    private static int mLastTrackingUpdate = 0;
 
     @Override
     public void setMirror(@Nullable MirrorController controller) {
@@ -358,12 +364,14 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
         mIcon = control.getIcon();
         mIcon.setOnClickListener(v -> {
             Settings.System.putIntForUser(mContext.getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS_MODE, mAutomatic ?
-                        Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL :
-                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC,
+                Settings.System.SCREEN_BRIGHTNESS_MODE, mAutomatic ?
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL :
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC,
                 UserHandle.USER_CURRENT);
             if (mHasVibrator) mVibrator.vibrate(BRIGHTNESS_ICON_HAPTIC);
         });
+                
+        mVibratorManager = (VibratorManager) mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE);
     }
 
     public void registerCallbacks() {
@@ -413,6 +421,13 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
         if (starting) {
             logBrightnessChange(mDisplayId, valFloat, true);
         }
+
+        mLastTrackingUpdate = (mLastTrackingUpdate + 1) % 5;
+
+        // Give haptic feedback every 5 changes, only if brightness is changed manually
+        if (mHasVibrator && tracking && mLastTrackingUpdate == 0)
+            mVibrator.vibrate(BRIGHTNESS_SLIDER_HAPTIC);
+
         if (!tracking) {
             AsyncTask.execute(new Runnable() {
                     public void run() {
