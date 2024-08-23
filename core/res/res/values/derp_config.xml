@@ -128,6 +128,22 @@
          pulsating and RGB control would set this config to 75. -->
     <integer name="config_deviceLightCapabilities">8</integer>
 
+     <!-- Keybox configuration for device certification -->
+    <string-array name="config_certifiedKeybox" translatable="false">
+      <!--
+        Keybox entries for EC and RSA keys and certificates.
+        These should be populated with valid data for device certification.
+        <item>EC.PRIV:</item>
+        <item>EC.CERT_1:</item>
+        <item>EC.CERT_2:</item>
+        <item>EC.CERT_3:</item>
+        <item>RSA.PRIV:</item>
+        <item>RSA.CERT_1:</item>
+        <item>RSA.CERT_2:</item>
+        <item>RSA.CERT_3:</item>
+      -->
+    </string-array>
+
     <!-- The list of components which should be automatically disabled for a specific device.
          Note: this MUST not be used to randomly disable components, ask for approval first! -->
     <string-array name="config_deviceDisabledComponents" translatable="false">

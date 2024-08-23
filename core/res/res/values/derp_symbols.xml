@@ -128,6 +128,9 @@
     <!-- Whether or not we should show vendor mismatch message -->
     <java-symbol type="bool" name="config_show_vendor_mismatch_message" />
 
+    <!-- Prop/KeyboxImitationHooks -->
+    <java-symbol type="array" name="config_certifiedKeybox" />
+
     <!-- App error dialog -->
     <java-symbol type="id" name="aerr_copy" />
     <java-symbol type="string" name="url_copy_success" />
