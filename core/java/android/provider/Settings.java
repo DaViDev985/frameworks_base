@@ -6592,12 +6592,6 @@ public final class Settings {
         public static final String SHOW_BATTERY_PERCENT_INSIDE = "status_bar_show_battery_percent_inside";
 
         /**
-         * Whether to take partial screenshot with volume down + power click.
-         * @hide
-         */
-        public static final String CLICK_PARTIAL_SCREENSHOT = "click_partial_screenshot";
-
-        /**
          * Swap volume buttons on rotation
          * @hide
          */
