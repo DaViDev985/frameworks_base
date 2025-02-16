@@ -97,7 +97,4 @@
 
     <!-- Bootleg unneccesary gradient declaration | Just for our shishu bars -->
     <java-symbol type="color" name="bootleg_accent_gradient_end_color" />
-
-    <!-- Slider vibrations fallbacks - set to true to vary amplitude in addition to duration -->
-    <java-symbol type="bool" name="config_sliderVibFallbackWaveform" />
 </resources>

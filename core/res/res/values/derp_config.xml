@@ -140,7 +140,4 @@
         <item>org.pixelexperience.faceunlock</item>
         <item>co.aospa.sense</item>
     </string-array>
-
-    <!-- Slider vibrations fallbacks - set to true to vary amplitude in addition to duration -->
-    <bool name="config_sliderVibFallbackWaveform">false</bool>
 </resources>
