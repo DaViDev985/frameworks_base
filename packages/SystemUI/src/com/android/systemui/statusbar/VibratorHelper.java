@@ -18,7 +18,6 @@ package com.android.systemui.statusbar;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
-import android.content.Context;
 import android.media.AudioAttributes;
 import android.os.Process;
 import android.os.VibrationAttributes;
@@ -59,26 +58,22 @@ public class VibratorHelper {
             VibrationAttributes.createForUsage(VibrationAttributes.USAGE_COMMUNICATION_REQUEST);
 
     private final Executor mExecutor;
-    private final long mMaxDurationFallback;
 
     /**
      * Creates a vibrator helper on a new single threaded {@link Executor}.
      */
     @Inject
-    public VibratorHelper(@Nullable Vibrator vibrator, Context context) {
-        this(vibrator, Executors.newSingleThreadExecutor(), context);
+    public VibratorHelper(@Nullable Vibrator vibrator) {
+        this(vibrator, Executors.newSingleThreadExecutor());
     }
 
     /**
      * Creates new vibrator helper on a specific {@link Executor}.
      */
     @VisibleForTesting
-    public VibratorHelper(@Nullable Vibrator vibrator, Executor executor, Context context) {
+    public VibratorHelper(@Nullable Vibrator vibrator, Executor executor) {
         mExecutor = executor;
         mVibrator = vibrator;
-
-        mMaxDurationFallback = context.getResources().getInteger(
-                com.android.internal.R.integer.config_sliderVibFallbackDuration);
     }
 
     /**
@@ -142,16 +137,11 @@ public class VibratorHelper {
     }
 
     /**
-     * @see Vibrator#areAllPrimitivesSupported() and Vibrator#hasVibrator()
+     * @see Vibrator#areAllPrimitivesSupported(VibrationEffect.Composition.PrimitiveType int...)
      */
     public boolean areAllPrimitivesSupported(
-        @NonNull @VibrationEffect.Composition.PrimitiveType int... primitiveIds) {
-        return mVibrator != null && mVibrator.hasVibrator() &&
-                mVibrator.areAllPrimitivesSupported(primitiveIds);
-    }
-
-    public long getMaxDurationFallback() {
-        return mMaxDurationFallback;
+            @NonNull @VibrationEffect.Composition.PrimitiveType int... primitiveIds) {
+        return mVibrator != null && mVibrator.areAllPrimitivesSupported(primitiveIds);
     }
 
     /**

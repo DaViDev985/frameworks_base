@@ -39,10 +39,6 @@
     <!-- Whether or not we should show vendor mismatch message -->
     <bool name="config_show_vendor_mismatch_message">false</bool>
 
-    <!-- Slider vibrations fallbacks - set either to non positive to disable
-         maximum duration in ms the slider vibrations scale to from 0 -->
-    <integer name="config_sliderVibFallbackDuration">100</integer>
-
     <!-- Any package that has one of the package names defined below will be prevented
          from using specific sensors in order to stop battery drain -->
     <string-array name="config_blockPackagesSensorDrain">
