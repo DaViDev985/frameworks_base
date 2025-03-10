@@ -695,7 +695,7 @@ ui::Rotation BootAnimation::parseOrientationProperty() {
     }();
     auto syspropValue = android::base::GetProperty(syspropName, "");
     if (syspropValue == "") {
-        syspropValue = android::base::GetProperty("ro.bootanim.set_orientation_logical_0", "");
+        syspropValue = android::base::GetProperty("persist.ro.bootanim.set_orientation_logical_0", "");
     }
 
     if (syspropValue == "ORIENTATION_90") {

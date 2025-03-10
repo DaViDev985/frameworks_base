@@ -23,6 +23,9 @@
     <!-- Whether to use Richtap vibration -->
     <java-symbol type="bool" name="config_usesRichtapVibration" />
 
+     <!-- Set boot animation to landscape by default -->
+    <java-symbol type="bool" name="config_landscapeBootOrientationEnabledByDefault" />
+
     <!-- Vendor mismatch fingerprint warning -->
     <java-symbol type="string" name="system_error_vendorprint" />
 

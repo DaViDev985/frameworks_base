@@ -353,7 +353,7 @@ public class DisplayRotation {
         }
         if ("".equals(syspropValue) && displayContent.isDefaultDisplay) {
             syspropValue = SystemProperties.get(
-                    "ro.bootanim.set_orientation_logical_" + displayContent.getDisplayId(), "");
+                    "persist.ro.bootanim.set_orientation_logical_" + displayContent.getDisplayId(), "");
         }
 
         if (syspropValue.equals("ORIENTATION_90")) {
